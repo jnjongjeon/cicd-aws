@@ -52,9 +52,9 @@ jobs:
             for pid in $(pgrep java); do
               if ps -p $pid -o args= | grep -q 'java -jar'; then
                 echo "Java process with 'java -jar' found (PID: $pid). Terminating..."
-                kill -9 $pid
+                kill -15 $pid
               fi
             done
 
             # 새로운 Java 애플리케이션 실행
-            echo "nohup java -jar ~/*.jar > ~/app.log 2>&1 &" | at now
+            nohup java -jar ~/*.jar > ~/app.log 2>&1 &
